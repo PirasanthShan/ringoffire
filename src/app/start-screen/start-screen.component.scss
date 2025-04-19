@@ -1,0 +1,157 @@
+// Variables
+$bg-color: #111;
+$font-stack: "Russo One", sans-serif;
+$text-color: #ff0;
+$accent: #ff004d;
+$accent-light: #ff0066;
+$active-bg: #003366;
+
+
+.start-screen{
+  background-color: rgb(0, 0, 0);
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  >img{
+    height: 100vh;
+  }
+}
+
+.start-label-box{
+  position: absolute;
+  left:0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background-color: $bg-color;
+  font-family: $font-stack;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+// Play‑Button Container
+.play-button-container {
+  position: relative;
+
+  // Reset children
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .play-button {
+    position: relative;
+    padding: 1.2em 3em;
+    background: transparent;
+    border: none;
+    color: $text-color;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $accent;
+      transform: scale(1.05);
+
+      ~ .clip {
+        box-shadow: inset 0 0 25px $accent-light;
+      }
+
+      ~ .corner {
+        transform: scale(1.25) rotate(45deg);
+        background-color: $accent-light;
+        animation: corner-light 0.4s ease-in-out infinite alternate;
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+      background-color: $active-bg;
+      box-shadow:
+        0 0 10px $active-bg,
+        0 0 20px $active-bg,
+        0 0 30px $active-bg;
+    }
+  }
+
+  .button-text {
+    position: relative;
+    z-index: 3;
+  }
+
+  .clip {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 5px solid $accent;
+    clip-path: polygon(20% 0, 80% 0, 100% 30%, 100% 70%, 80% 100%, 20% 100%, 0 70%, 0 30%);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .6);
+    transition: 0.3s ease;
+    animation: shape-glitch 1.5s infinite ease-in-out;
+  }
+
+  .corner {
+    position: absolute;
+    width: 30px; height: 30px;
+    background-color: $accent;
+    transform: rotate(45deg);
+    box-shadow: inset 1px 1px 8px $accent-light;
+    transition: 0.2s ease;
+    animation: corner-glitch 2s infinite ease-in-out;
+
+    &.top-left { top: -15px; left: -15px; }
+    &.top-right { top: -15px; right: -15px; }
+    &.bottom-left { bottom: -15px; left: -15px; }
+    &.bottom-right { bottom: -15px; right: -15px; }
+  }
+}
+
+// Keyframes
+@keyframes shape-glitch {
+  0%, 75%, 100% {
+    clip-path: polygon(20% 0, 80% 0, 100% 30%, 100% 70%, 80% 100%, 20% 100%, 0 70%, 0 30%);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .6);
+  }
+  25% {
+    clip-path: polygon(15% 0, 85% 0, 100% 35%, 100% 65%, 85% 100%, 15% 100%, 0 65%, 0 35%);
+    box-shadow: inset 0 0 25px $accent-light;
+  }
+  50% {
+    clip-path: polygon(10% 0, 90% 0, 100% 40%, 100% 60%, 90% 100%, 10% 100%, 0 60%, 0 40%);
+    box-shadow: inset 0 0 20px $accent-light;
+  }
+}
+
+@keyframes corner-glitch {
+  0%, 100% { transform: scale(1) rotate(45deg); opacity: 1; }
+  25%, 75% { transform: scale(1.1) rotate(50deg); opacity: .9; }
+  50% { transform: scale(0.9) rotate(40deg); opacity: .8; }
+}
+
+@keyframes corner-light {
+  0% { box-shadow: inset 0 0 5px $accent-light; }
+  100% { box-shadow: inset 0 0 15px $accent-light; }
+}
+
+
+
+
+
+
