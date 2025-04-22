@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
@@ -16,6 +15,12 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { GameDescriptionComponent } from './game-description/game-description.component';
 import { MatCardModule } from '@angular/material/card';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
+
+
+
 
 @NgModule({
   declarations: [
@@ -26,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     DialogAddPlayerComponent,
     GameDescriptionComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +42,10 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     MatInputModule,
     MatCardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
